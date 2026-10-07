@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Современная HTML-страница</title>
+  <!-- Подключение шрифтов Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome для иконок -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- Сброс и базовые стили ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f1f8 100%);
+      color: #1a2b3c;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    /* ----- Контейнер ----- */
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px -20px rgba(0, 20, 30, 0.25),
+                  0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      padding: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    /* ----- Заголовок ----- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: #0b2a3e;
+    }
+
+    .logo i {
+      color: #3a7bd5;
+      font-size: 2rem;
+    }
+
+    .badge {
+      background: #d0e2ff;
+      color: #1e4b7a;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* ----- Основной контент ----- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #0b2a3e 0%, #2c5a7a 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      max-width: 750px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #2e4a62;
+      max-width: 650px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* ----- Карточки ----- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 10px 25px -8px rgba(0, 20, 30, 0.1);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 35px -12px rgba(30, 75, 122, 0.25);
+      border-color: rgba(58, 123, 213, 0.3);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      color: #3a7bd5;
+      background: #e5efff;
+      width: 3.5rem;
+      height: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1.2rem;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0b2a3e;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #4a627a;
+      line-height: 1.5;
+    }
+
+    /* ----- Кнопки и интерактив ----- */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+      color: #1a2b3c;
+      box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .btn-primary {
+      background: #1e4b7a;
+      color: white;
+      box-shadow: 0 8px 18px -6px #1e4b7a70;
+    }
+
+    .btn-primary:hover {
+      background: #0f3a5c;
+      transform: scale(1.02);
+      box-shadow: 0 12px 22px -6px #1e4b7a90;
+    }
+
+    .btn-secondary:hover {
+      background: #f0f5ff;
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px -8px rgba(30, 75, 122, 0.2);
+      border-color: #c0d4f0;
+    }
+
+    .btn i {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover i {
+      transform: translateX(3px);
+    }
+
+    /* ----- Переключатель темы (демо) ----- */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0.3rem;
+      border-radius: 100px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #4a627a;
+      transition: all 0.2s;
+    }
+
+    .theme-btn.active {
+      background: white;
+      color: #0b2a3e;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ----- Футер ----- */
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #5b7288;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    footer i {
+      color: #3a7bd5;
+      opacity: 0.8;
+    }
+
+    /* ----- Тёмная тема (переключается через JS) ----- */
+    body.dark {
+      background: linear-gradient(145deg, #121e2b 0%, #1a2a3a 100%);
+      color: #e0ecf5;
+    }
+
+    body.dark .container {
+      background: rgba(20, 35, 50, 0.8);
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    }
+
+    body.dark .hero h1 {
+      background: linear-gradient(135deg, #c9e0ff, #91b9e0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    body.dark .hero p {
+      color: #b0c8dd;
+    }
+
+    body.dark .card {
+      background: #1e3142;
+      border-color: #2e445a;
+      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark .card h3 {
+      color: #d4e6ff;
+    }
+
+    body.dark .card p {
+      color: #a0b8cf;
+    }
+
+    body.dark .card-icon {
+      background: #1f3a55;
+      color: #6fa3e0;
+    }
+
+    body.dark .btn {
+      background: #1e3142;
+      color: #d4e6ff;
+      box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+      border-color: #2e445a;
+    }
+
+    body.dark .btn-primary {
+      background: #3a7bd5;
+      color: white;
+    }
+
+    body.dark .btn-secondary:hover {
+      background: #253c52;
+    }
+
+    body.dark .theme-toggle {
+      background: #1a2a3a;
+    }
+
+    body.dark .theme-btn {
+      color: #a0b8cf;
+    }
+
+    body.dark .theme-btn.active {
+      background: #2b4055;
+      color: white;
+    }
+
+    body.dark footer {
+      color: #9bb1c7;
+    }
+
+    body.dark .badge {
+      background: #1f3a55;
+      color: #b0d4ff;
+    }
+
+    body.dark .logo {
+      color: #e0ecf5;
+    }
+
+    /* ----- Адаптив ----- */
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem;
+        border-radius: 1.8rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Шапка -->
+    <header>
+      <div class="logo">
+        <i class="fas fa-code"></i>
+        <span>WebCraft</span>
+      </div>
+      <div class="badge">
+        <i class="fas fa-bolt"></i>
+        <span>v2.0 · интерактив</span>
+      </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+      <h1>Создавайте красивые интерфейсы с лёгкостью</h1>
+      <p>Современная HTML-страница с адаптивным дизайном, тёмной темой и плавными анимациями. Всё готово к использованию.</p>
+    </section>
+
+    <!-- Карточки -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+        <h3>Чистый дизайн</h3>
+        <p>Минималистичный интерфейс с акцентом на типографику и воздух.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Адаптивность</h3>
+        <p>Отлично выглядит на любых устройствах — от смартфона до десктопа.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-moon"></i></div>
+        <h3>Тёмная тема</h3>
+        <p>Переключайтесь между светлым и тёмным режимом в один клик.</p>
+      </div>
+    </div>
+
+    <!-- Нижняя панель с кнопками -->
+    <div class="actions">
+      <div class="btn-group">
+        <button class="btn btn-primary" id="exploreBtn">
+          <i class="fas fa-arrow-right"></i> Начать
+        </button>
+        <button class="btn btn-secondary" id="docsBtn">
+          <i class="fas fa-book-open"></i> Документация
+        </button>
+      </div>
+
+      <!-- Переключатель темы -->
+      <div class="theme-toggle">
+        <button class="theme-btn active" id="lightBtn" aria-label="Светлая тема">
+          <i class="fas fa-sun"></i> Светлая
+        </button>
+        <button class="theme-btn" id="darkBtn" aria-label="Тёмная тема">
+          <i class="fas fa-moon"></i> Тёмная
+        </button>
+      </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+      <i class="fas fa-copyright"></i>
+      <span>2025 WebCraft. Сделано с любовью к деталям.</span>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      // ----- Переключение темы -----
+      const body = document.body;
+      const lightBtn = document.getElementById('lightBtn');
+      const darkBtn = document.getElementById('darkBtn');
+
+      // Функция установки темы
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          body.classList.add('dark');
+          darkBtn.classList.add('active');
+          lightBtn.classList.remove('active');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          body.classList.remove('dark');
+          lightBtn.classList.add('active');
+          darkBtn.classList.remove('active');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+
+      // Проверка сохранённой темы
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        setTheme('dark');
+      } else {
+        setTheme('light'); // по умолчанию светлая
+      }
+
+      // Обработчики событий
+      lightBtn.addEventListener('click', () => setTheme('light'));
+      darkBtn.addEventListener('click', () => setTheme('dark'));
+
+      // ----- Интерактивные кнопки (демо) -----
+      const exploreBtn = document.getElementById('exploreBtn');
+      const docsBtn = document.getElementById('docsBtn');
+
+      exploreBtn.addEventListener('click', () => {
+        // Небольшая анимация + уведомление
+        exploreBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => exploreBtn.style.transform = '', 150);
+        alert('🚀 Добро пожаловать! Это демонстрационная страница. Наслаждайтесь!');
+      });
+
+      docsBtn.addEventListener('click', () => {
+        docsBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => docsBtn.style.transform = '', 150);
+        alert('📘 Здесь могла быть ваша документация. Но пока это просто пример.');
+      });
+
+      // ----- Плавное появление карточек при загрузке (опционально) -----
+      // Можно добавить анимацию через CSS, но оставим так для простоты.
+    })();
+  </script>
+</body>
+</html>
